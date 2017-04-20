@@ -53,7 +53,6 @@ var grid = [
 var generateMaze = function (grid, x, y) {
     if (x === void 0) { x = 0; }
     if (y === void 0) { y = 0; }
-    printMaze(grid);
     var randomizedDirections = underscore_1.shuffle(directions);
     for (var _i = 0, randomizedDirections_1 = randomizedDirections; _i < randomizedDirections_1.length; _i++) {
         var direction = randomizedDirections_1[_i];

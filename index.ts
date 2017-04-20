@@ -19,22 +19,22 @@ enum Directions {
     Right = 4,
     Left = 8,
 }
-const opposites = {
+const opposites : {[Directions:number]:Directions} = {
     [Directions.Up]: Directions.Down, [Directions.Down]: Directions.Up,
     [Directions.Right]: Directions.Left, [Directions.Left]: Directions.Right
 }
-const DY = {
+const DY : {[Directions:number]:number} = {
     [Directions.Up]: -1, [Directions.Down]: 1,
     [Directions.Left]: 0, [Directions.Right]: 0,
 }
-const DX = {
+const DX : {[Directions:number]:number} = {
     [Directions.Up]: 0, [Directions.Down]: 0,
     [Directions.Left]: -1, [Directions.Right]: 1,
 }
-const directions = [Directions.Up, Directions.Down, Directions.Right, Directions.Left]
+const directions : Directions[] = [Directions.Up, Directions.Down, Directions.Right, Directions.Left]
 
 
-const grid = [
+const grid : number[][] = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -47,12 +47,12 @@ const grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-const generateMaze = (grid, x: number = 0, y: number = 0) => {
-    const randomizedDirections = shuffle<number>(directions)
+const generateMaze = (grid: number[][], x: number = 0, y: number = 0) : void => {
+    const randomizedDirections:Directions[] = shuffle<number>(directions)
 
     for (let direction of randomizedDirections) {
-        const nx = x + DX[direction],
-            ny = y + DY[direction]
+        const nx:number = x + DX[direction],
+              ny:number = y + DY[direction]
 
         if (isCellValid(grid, nx, ny)) {
             grid[y][x] |= direction
@@ -64,9 +64,9 @@ const generateMaze = (grid, x: number = 0, y: number = 0) => {
     return
 }
 
-const isCellValid = (grid, x, y) => {
+const isCellValid = (grid: number[][], x: number, y: number) : boolean => {
     const width: number = grid[0].length,
-        height: number = grid.length
+          height: number = grid.length
 
     if (
         (0 <= x) && (x < width) &&
@@ -79,7 +79,7 @@ const isCellValid = (grid, x, y) => {
     return false
 }
 
-const printMaze = (grid) => {
+const printMaze = (grid: number[][]) : void => {
     let output: string = " "
     for (let i = 0; i < (grid.length * 2 - 1); i++) {
         output += "_"
